@@ -3,20 +3,98 @@
     {
       "id": "chest_pain",
       "triggers": ["chest pain", "గుండె నొప్పి", "ఛాతి నొప్పి"],
-      "escalation_en": "Go to the nearest hospital immediately or call emergency services.",
-      "escalation_te": "తక్షణం సమీప ఆసుపత్రికి వెళ్లండి లేదా అత్యవసర సేవలకు కాల్ చేయండి."
+      "summary_en": "Emergency sign detected: chest pain may indicate a serious condition.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: ఛాతి నొప్పి తీవ్రమైన పరిస్థితిని సూచించవచ్చు.",
+      "steps_en": [
+        "Call emergency services now.",
+        "Keep the person seated and calm.",
+        "Go to the nearest hospital immediately."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర సేవలకు కాల్ చేయండి.",
+        "వ్యక్తిని కూర్చోబెట్టి ప్రశాంతంగా ఉంచండి.",
+        "తక్షణం సమీప ఆసుపత్రికి వెళ్లండి."
+      ]
     },
     {
       "id": "breathing_difficulty",
       "triggers": ["breathing", "shortness of breath", "శ్వాస ఇబ్బంది"],
-      "escalation_en": "This may be serious. Seek urgent medical help now.",
-      "escalation_te": "ఇది తీవ్రమై ఉండవచ్చు. వెంటనే అత్యవసర వైద్య సహాయం పొందండి."
+      "summary_en": "Emergency sign detected: breathing difficulty requires urgent care.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: శ్వాస ఇబ్బంది ఉంటే వెంటనే చికిత్స అవసరం.",
+      "steps_en": [
+        "Call emergency services now.",
+        "Keep airway clear and avoid crowding around the person.",
+        "Get urgent medical help immediately."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర సేవలకు కాల్ చేయండి.",
+        "శ్వాస మార్గం ఖాళీగా ఉంచి, వ్యక్తి చుట్టూ గుంపు చేయకండి.",
+        "వెంటనే అత్యవసర వైద్య సహాయం పొందండి."
+      ]
     },
     {
       "id": "unconscious",
       "triggers": ["unconscious", "passed out", "స్పృహ లేదు"],
-      "escalation_en": "Treat this as an emergency and get immediate medical attention.",
-      "escalation_te": "ఇది అత్యవసర పరిస్థితి. వెంటనే వైద్య సహాయం పొందండి."
+      "summary_en": "Emergency sign detected: unconsciousness is a critical emergency.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: స్పృహ కోల్పోవడం అత్యంత కీలక అత్యవసరం.",
+      "steps_en": [
+        "Call emergency services now.",
+        "Lay the person on their side if breathing.",
+        "Do not give food or drink and seek immediate care."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర సేవలకు కాల్ చేయండి.",
+        "శ్వాస ఉంటే వ్యక్తిని పక్కవైపు పడుకోబెట్టండి.",
+        "ఆహారం లేదా పానీయం ఇవ్వకండి, వెంటనే వైద్య సహాయం పొందండి."
+      ]
+    },
+    {
+      "id": "severe_bleeding",
+      "triggers": ["severe bleeding", "heavy bleeding", "తీవ్ర రక్తస్రావం"],
+      "summary_en": "Emergency sign detected: severe bleeding can be life-threatening.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: తీవ్రమైన రక్తస్రావం ప్రాణాపాయం కలిగించవచ్చు.",
+      "steps_en": [
+        "Apply firm pressure with a clean cloth.",
+        "Call emergency services immediately.",
+        "Go to the nearest hospital without delay."
+      ],
+      "steps_te": [
+        "శుభ్రమైన గుడ్డతో గట్టిగా ఒత్తిడి చేయండి.",
+        "వెంటనే అత్యవసర సేవలకు కాల్ చేయండి.",
+        "ఆలస్యం చేయకుండా సమీప ఆసుపత్రికి వెళ్లండి."
+      ]
+    },
+    {
+      "id": "stroke_signs",
+      "triggers": ["face drooping", "slurred speech", "weakness one side", "స్ట్రోక్"],
+      "summary_en": "Emergency sign detected: possible stroke symptoms.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: స్ట్రోక్‌కు సంబంధించిన లక్షణాలు ఉండవచ్చు.",
+      "steps_en": [
+        "Call emergency services immediately.",
+        "Note the time symptoms started.",
+        "Take the person to emergency care right away."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర సేవలకు కాల్ చేయండి.",
+        "లక్షణాలు ఎప్పుడు ప్రారంభమయ్యాయో సమయం గమనించండి.",
+        "వ్యక్తిని వెంటనే అత్యవసర చికిత్సకు తీసుకెళ్లండి."
+      ]
+    },
+    {
+      "id": "pregnancy_high_risk",
+      "triggers": ["pregnant bleeding", "pregnancy severe pain", "గర్భధారణలో రక్తస్రావం"],
+      "summary_en": "Emergency sign detected: high-risk pregnancy warning signs.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: గర్భధారణలో అధిక ప్రమాద హెచ్చరిక లక్షణాలు.",
+      "steps_en": [
+        "Seek emergency obstetric care now.",
+        "Do not delay travel to a hospital.",
+        "Keep the person accompanied during transport."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర గైనకాలజీ చికిత్స పొందండి.",
+        "ఆసుపత్రికి వెళ్లడంలో ఆలస్యం చేయకండి.",
+        "ప్రయాణ సమయంలో వ్యక్తితో ఎవరో ఒకరు ఉండాలి."
+      ]
     }
   ]
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'core/engine/assistant_service.dart';
 import 'core/rules/offline_rules_repository.dart';
 import 'core/safety/red_flag_detector.dart';
+import 'core/storage/session_history_repository.dart';
 import 'features/chat/chat_screen.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class MediAssistApp extends StatelessWidget {
     final assistantService = AssistantService(
       rulesRepository: OfflineRulesRepository(),
       redFlagDetector: const RedFlagDetector(),
+      historyRepository: SessionHistoryRepository(),
     );
 
     return MaterialApp(

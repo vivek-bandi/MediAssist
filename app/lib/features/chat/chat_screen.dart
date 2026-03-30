@@ -18,7 +18,14 @@ class _ChatScreenState extends State<ChatScreen> {
   AppLanguage _language = AppLanguage.english;
   RuntimeMode _mode = RuntimeMode.offline;
   AssistantResult? _result;
+  List<SessionEntry> _history = const [];
   bool _loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadHistory();
+  }
 
   @override
   void dispose() {
@@ -41,10 +48,22 @@ class _ChatScreenState extends State<ChatScreen> {
       language: _language,
       mode: _mode,
     );
+    final history = await widget.assistantService.loadHistory();
 
     setState(() {
       _result = result;
+      _history = history;
       _loading = false;
+    });
+  }
+
+  Future<void> _loadHistory() async {
+    final history = await widget.assistantService.loadHistory();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _history = history;
     });
   }
 
@@ -145,7 +164,24 @@ class _ChatScreenState extends State<ChatScreen> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 8),
-                      Text(_result!.message),
+                      Text(_result!.summary),
+                      const SizedBox(height: 8),
+                      for (final step in _result!.steps)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('• '),
+                              Expanded(child: Text(step)),
+                            ],
+                          ),
+                        ),
+                      const SizedBox(height: 8),
+                      Text(
+                        _result!.safetyNote,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
                       if (_result!.usedOnlineEnhancement)
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
@@ -158,6 +194,31 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ),
               ),
+            if (_history.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              Text(
+                'Recent Sessions',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _history.length,
+                  itemBuilder: (context, index) {
+                    final item = _history[index];
+                    return Card(
+                      child: ListTile(
+                        title: Text(item.query),
+                        subtitle: Text(item.resultSummary),
+                        trailing: item.isEmergency
+                            ? const Icon(Icons.warning_amber_rounded, color: Colors.red)
+                            : const Icon(Icons.check_circle_outline),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ],
         ),
       ),

@@ -3,20 +3,92 @@
     {
       "id": "fever_basic",
       "triggers": ["fever", "temperature", "జ్వరం"],
-      "guidance_en": "You may have a mild fever. Rest, drink clean fluids, and monitor temperature every 6 hours.",
-      "guidance_te": "మీకు స్వల్ప జ్వరం ఉండవచ్చు. విశ్రాంతి తీసుకోండి, శుభ్రమైన ద్రవాలు తీసుకోండి, ప్రతి 6 గంటలకు ఉష్ణోగ్రత చూడండి."
+      "summary_en": "Symptoms suggest a mild fever pattern.",
+      "summary_te": "లక్షణాలు స్వల్ప జ్వరం నమూనాను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Rest and avoid heavy physical work.",
+        "Drink clean fluids regularly.",
+        "Check temperature every 6 hours."
+      ],
+      "self_care_te": [
+        "విశ్రాంతి తీసుకుని భారమైన పని చేయకండి.",
+        "శుభ్రమైన ద్రవాలు తరచూ తీసుకోండి.",
+        "ప్రతి 6 గంటలకు ఉష్ణోగ్రత చూడండి."
+      ],
+      "seek_care_if_en": "Seek medical care if fever is high, lasts more than 2 days, or worsens.",
+      "seek_care_if_te": "జ్వరం ఎక్కువగా ఉంటే, 2 రోజులకంటే ఎక్కువగా ఉంటే, లేదా పెరుగుతుంటే వైద్య సహాయం పొందండి."
     },
     {
       "id": "cough_basic",
       "triggers": ["cough", "throat", "దగ్గు", "గొంతు"],
-      "guidance_en": "For mild cough, hydrate well and avoid dust or smoke. Seek care if cough worsens or persists.",
-      "guidance_te": "స్వల్ప దగ్గు కోసం తగినంత ద్రవాలు తీసుకోండి, దుమ్ము లేదా పొగ నుండి దూరంగా ఉండండి. దగ్గు ఎక్కువైతే వైద్యుడిని సంప్రదించండి."
+      "summary_en": "Symptoms suggest mild throat irritation or cough.",
+      "summary_te": "లక్షణాలు స్వల్ప గొంతు ఇర్రిటేషన్ లేదా దగ్గును సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Drink warm fluids if possible.",
+        "Avoid smoke, dust, and cold air.",
+        "Rest your voice and body."
+      ],
+      "self_care_te": [
+        "సాధ్యమైతే గోరువెచ్చని ద్రవాలు తీసుకోండి.",
+        "పొగ, దుమ్ము, చల్లని గాలి నుండి దూరంగా ఉండండి.",
+        "గొంతుకూ శరీరానికీ విశ్రాంతి ఇవ్వండి."
+      ],
+      "seek_care_if_en": "Seek care if cough lasts more than 1 week, worsens, or breathing becomes difficult.",
+      "seek_care_if_te": "దగ్గు 1 వారానికి మించి కొనసాగితే, పెరిగితే, లేదా శ్వాస ఇబ్బంది ఉంటే వైద్యుడిని సంప్రదించండి."
     },
     {
       "id": "diarrhea_basic",
       "triggers": ["loose motion", "diarrhea", "విరేచనాలు"],
-      "guidance_en": "Take oral fluids and ORS if available. Watch for dehydration signs like dizziness or dry mouth.",
-      "guidance_te": "ద్రవాలు మరియు ORS ఉంటే తీసుకోండి. తల తిరగడం లేదా నోరు ఎండిపోవడం వంటి డీహైడ్రేషన్ లక్షణాలు గమనించండి."
+      "summary_en": "Symptoms suggest possible diarrhea with dehydration risk.",
+      "summary_te": "లక్షణాలు డీహైడ్రేషన్ ప్రమాదంతో కూడిన విరేచనాలను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Take ORS and clean fluids frequently.",
+        "Eat light foods and avoid oily meals.",
+        "Monitor for dehydration signs."
+      ],
+      "self_care_te": [
+        "ORS మరియు శుభ్రమైన ద్రవాలు తరచూ తీసుకోండి.",
+        "తేలికపాటి ఆహారం తీసుకుని, నూనె పదార్థాలు తగ్గించండి.",
+        "డీహైడ్రేషన్ లక్షణాలు గమనించండి."
+      ],
+      "seek_care_if_en": "Seek urgent care if diarrhea is severe, has blood, or signs of dehydration appear.",
+      "seek_care_if_te": "విరేచనాలు తీవ్రమై ఉంటే, రక్తం ఉంటే, లేదా డీహైడ్రేషన్ లక్షణాలు ఉంటే వెంటనే వైద్య సహాయం పొందండి."
+    },
+    {
+      "id": "headache_basic",
+      "triggers": ["headache", "head pain", "తలనొప్పి"],
+      "summary_en": "Symptoms suggest a mild headache pattern.",
+      "summary_te": "లక్షణాలు స్వల్ప తలనొప్పి నమూనాను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Rest in a quiet and dim place.",
+        "Drink water regularly.",
+        "Avoid long screen exposure for a few hours."
+      ],
+      "self_care_te": [
+        "నిశ్శబ్దంగా, తక్కువ వెలుతురు ఉన్న చోట విశ్రాంతి తీసుకోండి.",
+        "నీరు తరచూ తాగండి.",
+        "కొన్ని గంటలు స్క్రీన్ వినియోగాన్ని తగ్గించండి."
+      ],
+      "seek_care_if_en": "Seek urgent care if headache is sudden and severe, with vomiting, weakness, or vision changes.",
+      "seek_care_if_te": "తలనొప్పి అకస్మాత్తుగా తీవ్రమైతే, వాంతులు, బలహీనత, లేదా చూపు మార్పులు ఉంటే వెంటనే వైద్య సహాయం పొందండి."
+    },
+    {
+      "id": "vomiting_basic",
+      "triggers": ["vomiting", "nausea", "వాంతి", "వాంతులు"],
+      "summary_en": "Symptoms suggest mild stomach upset with vomiting.",
+      "summary_te": "లక్షణాలు వాంతులతో కూడిన స్వల్ప కడుపు అసౌకర్యాన్ని సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Take small sips of clean fluids.",
+        "Avoid solid or oily food for a short period.",
+        "Rest and monitor frequency of vomiting."
+      ],
+      "self_care_te": [
+        "శుభ్రమైన ద్రవాలు చిన్న మోతాదుల్లో తీసుకోండి.",
+        "కొంతసేపు ఘన ఆహారం లేదా నూనె పదార్థాలు తీసుకోకండి.",
+        "విశ్రాంతి తీసుకుని వాంతుల సంఖ్య గమనించండి."
+      ],
+      "seek_care_if_en": "Seek urgent care if vomiting is frequent, has blood, or the person cannot keep fluids down.",
+      "seek_care_if_te": "వాంతులు ఎక్కువగా ఉంటే, రక్తం ఉంటే, లేదా ద్రవాలు కూడా నిలవకపోతే వెంటనే వైద్య సహాయం పొందండి."
     }
   ]
 }
