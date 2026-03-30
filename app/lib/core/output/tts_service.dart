@@ -12,10 +12,41 @@ class TtsService {
     required AppLanguage language,
   }) async {
     final locale = language == AppLanguage.telugu ? 'te-IN' : 'en-US';
+    final speechRate = language == AppLanguage.telugu ? 0.45 : 0.34;
+    final chunks = _speechChunks(text);
+    if (chunks.isEmpty) {
+      return;
+    }
+
     await _flutterTts.stop();
     await _flutterTts.setLanguage(locale);
-    await _flutterTts.setSpeechRate(0.45);
-    await _flutterTts.speak(text);
+    await _flutterTts.setSpeechRate(speechRate);
+    await _flutterTts.awaitSpeakCompletion(true);
+
+    for (final chunk in chunks) {
+      await _flutterTts.speak(chunk);
+      await Future<void>.delayed(const Duration(milliseconds: 320));
+    }
+  }
+
+  List<String> _speechChunks(String value) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) {
+      return const [];
+    }
+
+    final normalized = trimmed.replaceAll(RegExp(r'\s+'), ' ');
+    final rawChunks = normalized
+        .split(RegExp(r'(?<=[.!?])\s+'))
+        .map((item) => item.trim())
+        .where((item) => item.isNotEmpty)
+        .toList();
+
+    if (rawChunks.isEmpty) {
+      return [normalized];
+    }
+
+    return rawChunks;
   }
 
   Future<void> stop() {

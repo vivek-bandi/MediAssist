@@ -89,6 +89,96 @@
       ],
       "seek_care_if_en": "Seek urgent care if vomiting is frequent, has blood, or the person cannot keep fluids down.",
       "seek_care_if_te": "వాంతులు ఎక్కువగా ఉంటే, రక్తం ఉంటే, లేదా ద్రవాలు కూడా నిలవకపోతే వెంటనే వైద్య సహాయం పొందండి."
+    },
+    {
+      "id": "common_cold_basic",
+      "triggers": ["cold", "runny nose", "sneezing", "జలుబు", "ముక్కు కారటం"],
+      "summary_en": "Symptoms suggest a common cold pattern.",
+      "summary_te": "లక్షణాలు సాధారణ జలుబు నమూనాను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Take rest and keep yourself warm.",
+        "Drink warm and clean fluids.",
+        "Use steam inhalation if available."
+      ],
+      "self_care_te": [
+        "విశ్రాంతి తీసుకుని శరీరాన్ని వెచ్చగా ఉంచండి.",
+        "గోరువెచ్చని, శుభ్రమైన ద్రవాలు తీసుకోండి.",
+        "సాధ్యమైతే ఆవిరి పీల్చండి."
+      ],
+      "seek_care_if_en": "Seek medical care if symptoms last more than 5 days, fever becomes high, or breathing worsens.",
+      "seek_care_if_te": "లక్షణాలు 5 రోజులకంటే ఎక్కువగా ఉంటే, జ్వరం ఎక్కువైతే, లేదా శ్వాస ఇబ్బంది పెరిగితే వైద్యుడిని సంప్రదించండి."
+    },
+    {
+      "id": "body_pain_fatigue",
+      "triggers": ["body pain", "body ache", "fatigue", "నొప్పులు", "అలసట"],
+      "summary_en": "Symptoms suggest body ache and fatigue pattern.",
+      "summary_te": "లక్షణాలు శరీర నొప్పులు మరియు అలసట నమూనాను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Take adequate rest and avoid heavy work.",
+        "Drink water and maintain regular meals.",
+        "Monitor fever or worsening weakness."
+      ],
+      "self_care_te": [
+        "తగిన విశ్రాంతి తీసుకుని భారమైన పనులు చేయకండి.",
+        "నీరు తాగుతూ సమయానికి ఆహారం తీసుకోండి.",
+        "జ్వరం లేదా బలహీనత పెరుగుతుందో గమనించండి."
+      ],
+      "seek_care_if_en": "Seek care if severe weakness, persistent fever, or inability to perform daily activities occurs.",
+      "seek_care_if_te": "తీవ్ర బలహీనత, కొనసాగుతున్న జ్వరం, లేదా రోజువారీ పనులు చేయలేకపోవడం ఉంటే వైద్య సహాయం పొందండి."
+    },
+    {
+      "id": "stomach_pain_basic",
+      "triggers": ["stomach pain", "abdominal pain", "gastric", "కడుపు నొప్పి", "ఉదర నొప్పి"],
+      "summary_en": "Symptoms suggest mild stomach discomfort pattern.",
+      "summary_te": "లక్షణాలు స్వల్ప కడుపు అసౌకర్య నమూనాను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Eat light and simple food.",
+        "Avoid spicy and oily meals for now.",
+        "Take clean fluids and observe pain pattern."
+      ],
+      "self_care_te": [
+        "తేలికపాటి సరళ ఆహారం తీసుకోండి.",
+        "ప్రస్తుతం కారంగా, నూనెగా ఉన్న ఆహారం తగ్గించండి.",
+        "శుభ్రమైన ద్రవాలు తీసుకుని నొప్పి నమూనాను గమనించండి."
+      ],
+      "seek_care_if_en": "Seek urgent care if pain is severe, persistent, with vomiting, blood in stool, or fever.",
+      "seek_care_if_te": "నొప్పి తీవ్రమై, ఆగకుండా ఉంటే, వాంతులు, మలంలో రక్తం, లేదా జ్వరం ఉంటే వెంటనే వైద్య సహాయం పొందండి."
+    },
+    {
+      "id": "skin_rash_basic",
+      "triggers": ["rash", "itching", "skin allergy", "దద్దుర్లు", "చర్మ అలర్జీ"],
+      "summary_en": "Symptoms suggest mild skin irritation or rash.",
+      "summary_te": "లక్షణాలు స్వల్ప చర్మ ఇర్రిటేషన్ లేదా దద్దుర్లను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Keep the affected area clean and dry.",
+        "Avoid scratching the skin.",
+        "Avoid new soaps or creams until symptoms improve."
+      ],
+      "self_care_te": [
+        "ప్రభావిత ప్రాంతాన్ని శుభ్రంగా, పొడిగా ఉంచండి.",
+        "చర్మాన్ని గోకకుండా ఉండండి.",
+        "లక్షణాలు తగ్గే వరకు కొత్త సబ్బులు లేదా క్రీములు వాడకండి."
+      ],
+      "seek_care_if_en": "Seek medical care if rash spreads rapidly, has swelling of lips/face, or breathing trouble appears.",
+      "seek_care_if_te": "దద్దుర్లు వేగంగా వ్యాపిస్తే, పెదవులు/ముఖం వాపు ఉంటే, లేదా శ్వాస ఇబ్బంది ఉంటే వైద్యుడిని వెంటనే సంప్రదించండి."
+    },
+    {
+      "id": "urinary_burning_basic",
+      "triggers": ["burning urine", "urine pain", "urinary burning", "మూత్రంలో మంట", "మూత్ర నొప్పి"],
+      "summary_en": "Symptoms suggest urinary irritation pattern.",
+      "summary_te": "లక్షణాలు మూత్ర సంబంధిత ఇర్రిటేషన్ నమూనాను సూచిస్తున్నాయి.",
+      "self_care_en": [
+        "Drink clean water frequently.",
+        "Do not delay passing urine.",
+        "Maintain personal hygiene and monitor fever."
+      ],
+      "self_care_te": [
+        "శుభ్రమైన నీరు తరచూ తాగండి.",
+        "మూత్ర విసర్జనను ఆలస్యం చేయకండి.",
+        "వ్యక్తిగత పరిశుభ్రత పాటించి జ్వరం ఉందో గమనించండి."
+      ],
+      "seek_care_if_en": "Seek care if fever, back pain, blood in urine, or severe pain occurs.",
+      "seek_care_if_te": "జ్వరం, వెన్నునొప్పి, మూత్రంలో రక్తం, లేదా తీవ్రమైన నొప్పి ఉంటే వైద్య సహాయం పొందండి."
     }
   ]
 }

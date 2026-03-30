@@ -95,6 +95,70 @@
         "ఆసుపత్రికి వెళ్లడంలో ఆలస్యం చేయకండి.",
         "ప్రయాణ సమయంలో వ్యక్తితో ఎవరో ఒకరు ఉండాలి."
       ]
+    },
+    {
+      "id": "seizure_fits",
+      "triggers": ["seizure", "fits", "convulsions", "అపస్మారం", "ఫిట్స్"],
+      "summary_en": "Emergency sign detected: seizure activity requires immediate medical care.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: అపస్మారం/ఫిట్స్ ఉంటే వెంటనే వైద్య సహాయం అవసరం.",
+      "steps_en": [
+        "Call emergency services immediately.",
+        "Turn the person gently onto their side and clear nearby objects.",
+        "Do not put anything in the mouth and seek urgent hospital care."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర సేవలకు కాల్ చేయండి.",
+        "వ్యక్తిని నెమ్మదిగా పక్కవైపు తిప్పి చుట్టూ ఉన్న వస్తువులను తొలగించండి.",
+        "నోరులో ఏమీ పెట్టకండి, వెంటనే ఆసుపత్రి చికిత్స పొందండి."
+      ]
+    },
+    {
+      "id": "severe_allergy",
+      "triggers": ["face swelling", "lip swelling", "allergic reaction", "ముఖం వాపు", "అలర్జీ శ్వాస ఇబ్బంది"],
+      "summary_en": "Emergency sign detected: severe allergic reaction may be life-threatening.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: తీవ్రమైన అలర్జీ ప్రతిచర్య ప్రాణాపాయం కలిగించవచ్చు.",
+      "steps_en": [
+        "Call emergency services immediately.",
+        "Keep the person calm and monitor breathing.",
+        "Go to the nearest emergency facility without delay."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర సేవలకు కాల్ చేయండి.",
+        "వ్యక్తిని ప్రశాంతంగా ఉంచి శ్వాసను గమనించండి.",
+        "ఆలస్యం చేయకుండా సమీప అత్యవసర చికిత్స కేంద్రానికి వెళ్లండి."
+      ]
+    },
+    {
+      "id": "poisoning_risk",
+      "triggers": ["poison", "chemical intake", "pesticide", "విషం", "పెస్టిసైడ్ తాగడం"],
+      "summary_en": "Emergency sign detected: suspected poisoning requires immediate care.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: విషప్రయోగ అనుమానం ఉంటే వెంటనే చికిత్స అవసరం.",
+      "steps_en": [
+        "Call emergency services or poison support immediately.",
+        "Do not force vomiting unless a doctor advises.",
+        "Take the person to emergency care at once."
+      ],
+      "steps_te": [
+        "వెంటనే అత్యవసర సేవలు లేదా విష సహాయ సేవలకు కాల్ చేయండి.",
+        "వైద్యుడు చెప్పకపోతే వాంతి చేయించవద్దు.",
+        "వ్యక్తిని వెంటనే అత్యవసర చికిత్సకు తీసుకెళ్లండి."
+      ]
+    },
+    {
+      "id": "high_fever_child",
+      "triggers": ["child high fever", "baby fever", "పిల్లలో ఎక్కువ జ్వరం", "శిశువు జ్వరం"],
+      "summary_en": "Emergency sign detected: high fever in a child needs urgent medical evaluation.",
+      "summary_te": "అత్యవసర లక్షణం గుర్తించబడింది: పిల్లలో ఎక్కువ జ్వరం ఉంటే వెంటనే వైద్య పరీక్ష అవసరం.",
+      "steps_en": [
+        "Seek urgent pediatric medical care now.",
+        "Keep the child hydrated and lightly dressed.",
+        "Go to the nearest hospital without delay."
+      ],
+      "steps_te": [
+        "వెంటనే పిల్లల వైద్య అత్యవసర సేవ పొందండి.",
+        "పిల్లకు ద్రవాలు ఇచ్చి తేలిక దుస్తులు వేయండి.",
+        "ఆలస్యం చేయకుండా సమీప ఆసుపత్రికి వెళ్లండి."
+      ]
     }
   ]
 }

@@ -15,7 +15,7 @@ class VoiceInputService {
 
   Future<void> startListening({
     required AppLanguage language,
-    required void Function(String words) onResult,
+    required void Function(String words, bool isFinal) onResult,
   }) async {
     final locale = language == AppLanguage.telugu ? 'te-IN' : 'en-US';
     await _speechToText.listen(
@@ -24,7 +24,7 @@ class VoiceInputService {
         partialResults: true,
       ),
       onResult: (result) {
-        onResult(result.recognizedWords);
+        onResult(result.recognizedWords, result.finalResult);
       },
     );
   }

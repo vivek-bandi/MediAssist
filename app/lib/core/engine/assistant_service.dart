@@ -1,5 +1,5 @@
 import '../../models/assistant_models.dart';
-import '../online/gemini_online_adapter.dart';
+import '../online/groq_online_adapter.dart';
 import '../rules/offline_rules_repository.dart';
 import '../safety/red_flag_detector.dart';
 import '../storage/session_history_repository.dart';
@@ -9,7 +9,7 @@ class AssistantService {
     required OfflineRulesRepository rulesRepository,
     required RedFlagDetector redFlagDetector,
     required SessionHistoryRepository historyRepository,
-    GeminiOnlineAdapter? onlineAdapter,
+    GroqOnlineAdapter? onlineAdapter,
   })  : _rulesRepository = rulesRepository,
         _redFlagDetector = redFlagDetector,
         _historyRepository = historyRepository,
@@ -18,7 +18,9 @@ class AssistantService {
   final OfflineRulesRepository _rulesRepository;
   final RedFlagDetector _redFlagDetector;
   final SessionHistoryRepository _historyRepository;
-  final GeminiOnlineAdapter? _onlineAdapter;
+  final GroqOnlineAdapter? _onlineAdapter;
+
+  bool get isOnlineConfigured => _onlineAdapter?.isConfigured ?? false;
 
   Future<List<SessionEntry>> loadHistory() {
     return _historyRepository.loadHistory();
@@ -34,15 +36,23 @@ class AssistantService {
 
     if (match != null) {
       final result = AssistantResult(
-        summary: _pickText(
+        summary: _polishSummary(
           language: language,
-          english: match.summaryEn,
-          telugu: match.summaryTe,
+          summary: _pickText(
+            language: language,
+            english: match.summaryEn,
+            telugu: match.summaryTe,
+          ),
+          isEmergency: true,
         ),
-        steps: _pickList(
+        steps: _finalizeSteps(
           language: language,
-          english: match.stepsEn,
-          telugu: match.stepsTe,
+          rawSteps: _pickList(
+            language: language,
+            english: match.stepsEn,
+            telugu: match.stepsTe,
+          ),
+          ensureDoctorTip: false,
         ),
         safetyNote: _pickText(
           language: language,
@@ -138,8 +148,16 @@ class AssistantService {
 
     if (mode == RuntimeMode.offline) {
       final result = AssistantResult(
-        summary: summary,
-        steps: [...steps, seekCareIf],
+        summary: _polishSummary(
+          language: language,
+          summary: summary,
+          isEmergency: false,
+        ),
+        steps: _finalizeSteps(
+          language: language,
+          rawSteps: [...steps, seekCareIf],
+          ensureDoctorTip: true,
+        ),
         safetyNote: safetyNote,
         isEmergency: false,
         usedOnlineEnhancement: false,
@@ -169,30 +187,53 @@ class AssistantService {
     final usedOnline =
       onlineResult.status == OnlineFetchStatus.success && onlineResult.tips.isNotEmpty;
 
-    final offlineFallbackMessage = onlineResult.status == OnlineFetchStatus.rateLimited
-      ? _pickText(
+    final offlineFallbackMessage = switch (onlineResult.status) {
+      OnlineFetchStatus.rateLimited => _pickText(
         language: language,
         english:
           'Online service is rate-limited right now (429). Using offline-safe guidance. Try online mode again in a few minutes; consult a doctor if symptoms continue beyond 24-48 hours.',
         telugu:
           'ప్రస్తుతం ఆన్‌లైన్ సేవకు రేట్-లిమిట్ (429) ఉంది. ఆఫ్‌లైన్ సురక్షిత మార్గదర్శకం ఉపయోగించబడుతోంది. కొన్ని నిమిషాల తర్వాత మళ్లీ ప్రయత్నించండి; లక్షణాలు 24-48 గంటలకంటే ఎక్కువగా ఉంటే వైద్యుడిని సంప్రదించండి.',
-        )
-      : _pickText(
+      ),
+      OnlineFetchStatus.notConfigured => _pickText(
+        language: language,
+        english:
+          'Online mode is not configured (missing GROQ_API_KEY). Using offline-safe guidance.',
+        telugu:
+          'ఆన్‌లైన్ మోడ్ కాన్ఫిగర్ కాలేదు (GROQ_API_KEY లేదు). ఆఫ్‌లైన్ సురక్షిత మార్గదర్శకం ఉపయోగించబడుతోంది.',
+      ),
+      _ => _pickText(
         language: language,
         english:
           'Online enrichment unavailable. Using offline-safe guidance. If symptoms continue beyond 24-48 hours, consult a doctor.',
         telugu:
           'ఆన్‌లైన్ మెరుగుదల అందుబాటులో లేదు. ఆఫ్‌లైన్ సురక్షిత మార్గదర్శకం ఉపయోగించబడుతోంది. లక్షణాలు 24-48 గంటలకంటే ఎక్కువగా ఉంటే వైద్యుడిని సంప్రదించండి.',
-        );
+      ),
+    };
 
     final result = AssistantResult(
-      summary: summary,
-      steps: [
-        ...steps,
-        seekCareIf,
-        if (usedOnline) ...onlineResult.tips,
-        if (!usedOnline) offlineFallbackMessage,
-      ],
+      summary: _polishSummary(
+        language: language,
+        summary: usedOnline
+            ? (onlineResult.summary ??
+                _pickText(
+                  language: language,
+                  english: 'Online guidance generated for your symptoms.',
+                  telugu: 'మీ లక్షణాల కోసం ఆన్‌లైన్ మార్గదర్శకం రూపొందించబడింది.',
+                ))
+            : summary,
+        isEmergency: false,
+      ),
+      steps: _finalizeSteps(
+        language: language,
+        rawSteps: [
+          if (usedOnline) ...onlineResult.tips,
+          if (!usedOnline) ...steps,
+          if (!usedOnline) seekCareIf,
+          if (!usedOnline) offlineFallbackMessage,
+        ],
+        ensureDoctorTip: true,
+      ),
       safetyNote: safetyNote,
       isEmergency: false,
       usedOnlineEnhancement: usedOnline,
@@ -226,5 +267,95 @@ class AssistantService {
     required List<String> telugu,
   }) {
     return language == AppLanguage.telugu ? telugu : english;
+  }
+
+  String _polishSummary({
+    required AppLanguage language,
+    required String summary,
+    required bool isEmergency,
+  }) {
+    final cleaned = _normalizeSentence(summary);
+    if (cleaned.isEmpty || isEmergency) {
+      return cleaned;
+    }
+
+    if (language == AppLanguage.english) {
+      final normalized = cleaned.toLowerCase();
+      final alreadyHedged = normalized.contains('may ') ||
+          normalized.contains('might ') ||
+          normalized.contains('could ') ||
+          normalized.contains('possible') ||
+          normalized.contains('suggest');
+      if (alreadyHedged) {
+        return cleaned;
+      }
+
+      final lowerStart = cleaned[0].toLowerCase() + cleaned.substring(1);
+      return _normalizeSentence('You may have symptoms related to $lowerStart');
+    }
+
+    if (cleaned.contains('ఉండవచ్చు') || cleaned.contains('సూచ')) {
+      return cleaned;
+    }
+    return _normalizeSentence('మీ లక్షణాలు $cleaned అని సూచించవచ్చు');
+  }
+
+  List<String> _finalizeSteps({
+    required AppLanguage language,
+    required List<String> rawSteps,
+    required bool ensureDoctorTip,
+  }) {
+    final unique = <String>[];
+    for (final step in rawSteps) {
+      final cleaned = _normalizeSentence(step);
+      if (cleaned.isEmpty) {
+        continue;
+      }
+
+      final exists = unique.any(
+        (item) => item.toLowerCase() == cleaned.toLowerCase(),
+      );
+      if (!exists) {
+        unique.add(cleaned);
+      }
+    }
+
+    if (ensureDoctorTip) {
+      final doctorTip = _doctorConsultTip(language);
+      final hasDoctorTip = unique.any(
+        (item) {
+          final lower = item.toLowerCase();
+          return lower.contains('doctor') || lower.contains('వైద్య');
+        },
+      );
+      if (!hasDoctorTip) {
+        unique.add(doctorTip);
+      }
+    }
+
+    return unique;
+  }
+
+  String _doctorConsultTip(AppLanguage language) {
+    return language == AppLanguage.telugu
+        ? 'లక్షణాలు కొనసాగితే లేదా పెరిగితే వైద్యుడిని సంప్రదించండి.'
+        : 'Consult a doctor if symptoms continue or worsen.';
+  }
+
+  String _normalizeSentence(String value) {
+    final compact = value.replaceAll(RegExp(r'\s+'), ' ').trim();
+    if (compact.isEmpty) {
+      return compact;
+    }
+
+    final startsWithLetter = RegExp(r'^[A-Za-z]').hasMatch(compact);
+    final capitalized = startsWithLetter
+        ? compact[0].toUpperCase() + compact.substring(1)
+        : compact;
+
+    if (RegExp(r'[.!?]$').hasMatch(capitalized)) {
+      return capitalized;
+    }
+    return '$capitalized.';
   }
 }
