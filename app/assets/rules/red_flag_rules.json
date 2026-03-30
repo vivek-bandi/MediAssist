@@ -1,0 +1,22 @@
+{
+  "rules": [
+    {
+      "id": "chest_pain",
+      "triggers": ["chest pain", "గుండె నొప్పి", "ఛాతి నొప్పి"],
+      "escalation_en": "Go to the nearest hospital immediately or call emergency services.",
+      "escalation_te": "తక్షణం సమీప ఆసుపత్రికి వెళ్లండి లేదా అత్యవసర సేవలకు కాల్ చేయండి."
+    },
+    {
+      "id": "breathing_difficulty",
+      "triggers": ["breathing", "shortness of breath", "శ్వాస ఇబ్బంది"],
+      "escalation_en": "This may be serious. Seek urgent medical help now.",
+      "escalation_te": "ఇది తీవ్రమై ఉండవచ్చు. వెంటనే అత్యవసర వైద్య సహాయం పొందండి."
+    },
+    {
+      "id": "unconscious",
+      "triggers": ["unconscious", "passed out", "స్పృహ లేదు"],
+      "escalation_en": "Treat this as an emergency and get immediate medical attention.",
+      "escalation_te": "ఇది అత్యవసర పరిస్థితి. వెంటనే వైద్య సహాయం పొందండి."
+    }
+  ]
+}

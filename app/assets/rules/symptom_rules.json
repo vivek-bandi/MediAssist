@@ -1,0 +1,22 @@
+{
+  "rules": [
+    {
+      "id": "fever_basic",
+      "triggers": ["fever", "temperature", "జ్వరం"],
+      "guidance_en": "You may have a mild fever. Rest, drink clean fluids, and monitor temperature every 6 hours.",
+      "guidance_te": "మీకు స్వల్ప జ్వరం ఉండవచ్చు. విశ్రాంతి తీసుకోండి, శుభ్రమైన ద్రవాలు తీసుకోండి, ప్రతి 6 గంటలకు ఉష్ణోగ్రత చూడండి."
+    },
+    {
+      "id": "cough_basic",
+      "triggers": ["cough", "throat", "దగ్గు", "గొంతు"],
+      "guidance_en": "For mild cough, hydrate well and avoid dust or smoke. Seek care if cough worsens or persists.",
+      "guidance_te": "స్వల్ప దగ్గు కోసం తగినంత ద్రవాలు తీసుకోండి, దుమ్ము లేదా పొగ నుండి దూరంగా ఉండండి. దగ్గు ఎక్కువైతే వైద్యుడిని సంప్రదించండి."
+    },
+    {
+      "id": "diarrhea_basic",
+      "triggers": ["loose motion", "diarrhea", "విరేచనాలు"],
+      "guidance_en": "Take oral fluids and ORS if available. Watch for dehydration signs like dizziness or dry mouth.",
+      "guidance_te": "ద్రవాలు మరియు ORS ఉంటే తీసుకోండి. తల తిరగడం లేదా నోరు ఎండిపోవడం వంటి డీహైడ్రేషన్ లక్షణాలు గమనించండి."
+    }
+  ]
+}
