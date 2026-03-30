@@ -1,4 +1,5 @@
 import '../../models/assistant_models.dart';
+import '../online/gemini_online_adapter.dart';
 import '../rules/offline_rules_repository.dart';
 import '../safety/red_flag_detector.dart';
 import '../storage/session_history_repository.dart';
@@ -8,13 +9,16 @@ class AssistantService {
     required OfflineRulesRepository rulesRepository,
     required RedFlagDetector redFlagDetector,
     required SessionHistoryRepository historyRepository,
+    GeminiOnlineAdapter? onlineAdapter,
   })  : _rulesRepository = rulesRepository,
         _redFlagDetector = redFlagDetector,
-        _historyRepository = historyRepository;
+        _historyRepository = historyRepository,
+        _onlineAdapter = onlineAdapter;
 
   final OfflineRulesRepository _rulesRepository;
   final RedFlagDetector _redFlagDetector;
   final SessionHistoryRepository _historyRepository;
+  final GeminiOnlineAdapter? _onlineAdapter;
 
   Future<List<SessionEntry>> loadHistory() {
     return _historyRepository.loadHistory();
@@ -155,22 +159,43 @@ class AssistantService {
       return result;
     }
 
+    final onlineResult = await _onlineAdapter?.fetchEnrichedTips(
+        query: query,
+        language: language,
+        baselineSummary: summary,
+      ) ??
+      const OnlineFetchResult(status: OnlineFetchStatus.notConfigured);
+
+    final usedOnline =
+      onlineResult.status == OnlineFetchStatus.success && onlineResult.tips.isNotEmpty;
+
+    final offlineFallbackMessage = onlineResult.status == OnlineFetchStatus.rateLimited
+      ? _pickText(
+        language: language,
+        english:
+          'Online service is rate-limited right now (429). Using offline-safe guidance. Try online mode again in a few minutes; consult a doctor if symptoms continue beyond 24-48 hours.',
+        telugu:
+          'ప్రస్తుతం ఆన్‌లైన్ సేవకు రేట్-లిమిట్ (429) ఉంది. ఆఫ్‌లైన్ సురక్షిత మార్గదర్శకం ఉపయోగించబడుతోంది. కొన్ని నిమిషాల తర్వాత మళ్లీ ప్రయత్నించండి; లక్షణాలు 24-48 గంటలకంటే ఎక్కువగా ఉంటే వైద్యుడిని సంప్రదించండి.',
+        )
+      : _pickText(
+        language: language,
+        english:
+          'Online enrichment unavailable. Using offline-safe guidance. If symptoms continue beyond 24-48 hours, consult a doctor.',
+        telugu:
+          'ఆన్‌లైన్ మెరుగుదల అందుబాటులో లేదు. ఆఫ్‌లైన్ సురక్షిత మార్గదర్శకం ఉపయోగించబడుతోంది. లక్షణాలు 24-48 గంటలకంటే ఎక్కువగా ఉంటే వైద్యుడిని సంప్రదించండి.',
+        );
+
     final result = AssistantResult(
       summary: summary,
       steps: [
         ...steps,
         seekCareIf,
-        _pickText(
-          language: language,
-          english:
-              'Online enhancement: If symptoms continue beyond 24-48 hours, consult a doctor.',
-          telugu:
-              'ఆన్‌లైన్ మెరుగుదల: లక్షణాలు 24-48 గంటలకంటే ఎక్కువగా ఉంటే వైద్యుడిని సంప్రదించండి.',
-        ),
+        if (usedOnline) ...onlineResult.tips,
+        if (!usedOnline) offlineFallbackMessage,
       ],
       safetyNote: safetyNote,
       isEmergency: false,
-      usedOnlineEnhancement: true,
+      usedOnlineEnhancement: usedOnline,
     );
 
     await _historyRepository.addEntry(

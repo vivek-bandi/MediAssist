@@ -82,7 +82,7 @@ Build a voice-first, offline-first healthcare guidance prototype that works on l
 - Speech-to-text: Vosk (offline local model).
 - Text-to-speech: platform TTS abstraction.
 - Rules engine: JSON/YAML-driven rule packs.
-- Online adapter: Gemini wrapper with timeout and retries.
+- Online adapter: Gemini wrapper with timeout and single-request fallback handling.
 - Data storage: local history and reminder metadata.
 
 ## Repository Structure
@@ -148,3 +148,20 @@ Build a voice-first, offline-first healthcare guidance prototype that works on l
 - Online mode enriches response and falls back safely to offline.
 - Local medicine reminder can be created and announced by voice alert.
 - Demo runs reliably on target low-end Android device.
+
+## Implementation Status (Code Scan - 30 Mar 2026)
+- [x] Flutter app shell and chat UI implemented.
+- [x] Telugu and English language toggle implemented.
+- [x] Offline symptom rules + red-flag detection implemented.
+- [x] Offline-first guidance with clear safety disclaimer implemented.
+- [x] Voice input (speech_to_text) integrated.
+- [x] Voice output (flutter_tts) integrated.
+- [x] Session history local storage implemented.
+- [x] Online Gemini enhancement integrated with one request per submit.
+- [x] Online failure/429 fallback to offline-safe guidance implemented.
+- [ ] Local medicine reminder flow is not implemented yet.
+
+## Known Runtime Constraint (Current)
+- Gemini HTTP 429 is a provider quota/rate-limit response and can still occur even with correct app logic.
+- Current code sends one online request per submit and falls back safely when 429 occurs.
+- Remaining action is operational: rotate/restrict API key and increase quota/billing as needed.
